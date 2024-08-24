@@ -12,6 +12,7 @@ export default class AccountController{
 
     async signin(request:Request, response:Response, next:NextFunction):Promise<any>{
         try{
+            console.log('teste')
             const validationUser = await signinValidation.validate(request.body)
             const user = await this.userRepository.getByEmail(validationUser.email)
             if(user && validationUser.password == user.password){

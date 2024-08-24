@@ -1,11 +1,13 @@
 import { NextFunction , Response, Request} from "express";
 
-async function erroMiddleware(
-    response:Response,
+export async function errorMiddleware(
+    error:Error,
     request:Request,
-    next:NextFunction,
-    error:any
+    response:Response,
+    next:NextFunction
 ){
     if(error instanceof Error)
         return response.status(404).json("erro")
+
+    return response.status(404).json("erro")
 }

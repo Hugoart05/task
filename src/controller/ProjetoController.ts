@@ -6,26 +6,26 @@ import { AuthenticationRequest } from "../types/authentication-request";
 
 export class ProjectController {
     constructor(
-        private readonly projectService:IProjectService
+        private readonly projectService: IProjectService
     ) { }
 
-    async create(request: AuthenticationRequest, response: Response, next:NextFunction) {
-        try{
-            
+    async create(request: AuthenticationRequest, response: Response, next: NextFunction) {
+        try {
+
             const validation = await projectValidation.validate(request.body)
-            if(!request.user)
-                return response.status(401).json({message:"Usuario não esta autenticado"})
-            const { userplan , userid} = request.user as JWTPayload
-            const  {message,success} = await this.projectService.createProject(validation,userplan, userid)
+            if (!request.user)
+                return response.status(401).json({ message: "Usuario não esta autenticado" })
+            const { userplan, userid } = request.user as JWTPayload
+            const { message, success } = await this.projectService.createProject(validation, userplan, userid)
             return response.status(success ? 200 : 400).json(message)
-            
-        }catch(error){
+
+        } catch (error) {
             next(error)
         }
     }
 
-    async assigneParticipant(request: AuthenticationRequest, response: Response, next:NextFunction){
-        
+    async assigneParticipant(request: AuthenticationRequest, response: Response, next: NextFunction) {
+
     }
 
 }
