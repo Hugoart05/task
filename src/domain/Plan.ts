@@ -1,4 +1,4 @@
-import { IPlanType } from "../models/IPlanType"
+import { IPlanType } from "../models/IPlanType.ts"
 
 export class Plan {
     private id: number

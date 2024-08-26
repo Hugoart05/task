@@ -1,9 +1,9 @@
 import { NextFunction } from "express";
-import { AuthenticationRequest } from "../types/authentication-request";
 import { Response } from 'express'
 import { config } from 'dotenv'
 import * as jwt from 'jsonwebtoken'
-import { JWTPayload } from "../types/jwt-payload";
+import { AuthenticationRequest } from "../types/authentication-request.ts";
+import { JWTPayload } from "../types/jwt-payload.ts";
 
 export function authenticationMiddleware(
     request: AuthenticationRequest,
@@ -14,7 +14,7 @@ export function authenticationMiddleware(
     const { authorization } = request.headers
     if (!authorization)
         return response.status(401).json({ message: "Acesso negado" })
-
+    
     const token = authorization.split(' ')[1]
     const secrethash = process.env.SECRET_KEY || "defaulthash"
     jwt.verify(token, secrethash, (error, user) => {
@@ -26,7 +26,7 @@ export function authenticationMiddleware(
             next()
         }
 
-        return response.status(403).json({message:"Token inválido."})
+        return response.status(403).json({ message: "Token inválido." })
     })
 
 }

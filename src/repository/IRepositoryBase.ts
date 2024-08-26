@@ -1,3 +1,5 @@
+import { Connection } from "mysql2"
+
 export default interface IRepository<T extends object>{
     create(data:Partial<T>):Promise<void>
     get(id:number):Promise<T>

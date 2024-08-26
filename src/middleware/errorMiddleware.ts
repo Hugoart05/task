@@ -1,4 +1,5 @@
 import { NextFunction , Response, Request} from "express";
+import * as yup from 'yup'
 
 export async function errorMiddleware(
     error:Error,
@@ -6,8 +7,12 @@ export async function errorMiddleware(
     response:Response,
     next:NextFunction
 ){
-    if(error instanceof Error)
-        return response.status(404).json("erro")
+    if(error instanceof yup.ValidationError)
+        return response.status(400).json({message:error.errors})
 
-    return response.status(404).json("erro")
+
+    if(error instanceof Error)
+        return response.status(404).json(error.message)
+
+    return response.status(404).json(error)
 }

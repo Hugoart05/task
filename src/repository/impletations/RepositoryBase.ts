@@ -1,22 +1,25 @@
 import { Connection } from "mysql2/promise";
-import IRepository from "../IRepositoryBase";
-import { object } from "yup";
+import IRepository from "../IRepositoryBase.ts";
 
 export default class RepositoryBase<T extends object> implements IRepository<T>{
-    constructor(
-        private conn:Connection,
-        private tableName:string
-    ){}
-
+    protected tableName:string;
+    protected conn:Connection
+    constructor(conn:Connection, tableName:string){
+        this.conn = conn,
+        this.tableName = tableName
+    }
+    
     async create(data: Partial<T>): Promise<void> {
         const columns = Object.keys(data).join(', ')
         const keys = Object.keys(data)
         const values = Object.values(data)
         const placeholders = values.map(()=>'?').join(', ')
-        const query = `ÌNSERT INTO ${this.tableName} (${columns}) VALUES (${placeholders})`;
+        const query = `INSERT INTO ${this.tableName} (${columns}) VALUES (${placeholders})`;
+        console.log(query)
         try{
             const [result] = await this.conn.query(query, values)
         }catch(error){
+            console.log(error)
             throw new Error("Falha ao inserir um registro" + this.tableName)
         }
     }

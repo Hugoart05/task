@@ -1,9 +1,10 @@
 import { Connection } from "mysql2";
-import { DataBase } from "../context/data-base";
+import { DataBase } from "../context/data-base.ts";
 
 export async function InitializeDataBase() {
     const dbase = DataBase.getInstance()
     const conn = await dbase.getConnection()
+    const defaultAvatar = "https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_3x4.jpg"
     const createRoles = `
         CREATE TABLE IF NOT EXISTS roles (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,7 +13,9 @@ export async function InitializeDataBase() {
     const createPlan = `
     CREATE TABLE IF NOT EXISTS planos (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(255) NOT NULL
+        nome VARCHAR(255) NOT NULL,
+        max INT DEFAULT 1,
+        maxparticipantsperproject INT DEFAULT 1
     );
     
     `
@@ -22,9 +25,9 @@ export async function InitializeDataBase() {
                 nome VARCHAR(255) NOT NULL,
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(60) NOT NULL,
-                avatarurl VARCHAR(255) NOT NULL,
-                roleid INT NOT NULL DEFAULT 1,
-                planid INT NOT NULL DEFAULT 1,
+                avatarurl VARCHAR(255) ,
+                roleid INT,
+                planid INT,
                 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 FOREIGN KEY (roleid) REFERENCES roles (id),

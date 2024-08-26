@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import IUserRepository from "../repository/IUserRepository";
-import { IMapper } from "../types/IMapper";
-import IUser from "../models/IUser";
-import { IProjetoRepository } from "../repository/IProjetoRepository";
+import { IProjetoRepository } from "../repository/IProjetoRepository.ts";
+import { IMapper } from "../types/IMapper.ts";
+import IUser from "../models/IUser.ts";
+import IUserRepository from "../repository/IUserRepository.ts";
+
 
 export default class UserController {
     constructor(

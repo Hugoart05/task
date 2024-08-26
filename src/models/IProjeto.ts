@@ -1,5 +1,6 @@
-import IParticipante from "./IParticipante"
-import ITarefas from "./ITarefas"
+import IParticipante from "./IParticipante.ts"
+import ITarefas from "./ITarefas.ts"
+
 
 export default interface IProjeto{
     id:number

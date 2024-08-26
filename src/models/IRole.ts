@@ -1,4 +1,4 @@
-import IUser from "./IUser"
+import IUser from "./IUser.ts"
 
 export interface IRole{
     id:number

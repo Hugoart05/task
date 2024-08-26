@@ -1,4 +1,4 @@
-import ITarefas from "./ITarefas"
+import ITarefas from "./ITarefas.ts"
 
 export default interface IStatus{
     id:number

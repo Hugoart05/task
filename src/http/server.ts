@@ -1,11 +1,13 @@
 import express, { json } from 'express'
-import { accountRoutes } from './routes/account-routes'
-import { errorMiddleware } from '../middleware/errorMiddleware'
+import { errorMiddleware } from '../middleware/errorMiddleware.ts'
+import { accountRoutes } from './routes/account-routes.ts'
+import { projectRoutes } from './routes/project-routes.ts'
 
 const app = express()
 
-app.use(json)
+app.use(json())
 app.use('/api', accountRoutes)
+app.use('/api', projectRoutes)
 
 app.use(errorMiddleware)
 app.listen(8080, ()=>{

@@ -1,6 +1,6 @@
-import { IUserDTO } from "../DTOs/UserDTO";
-import { JWTPayload } from "./jwt-payload";
+
 import  {Request} from 'express'
+import { JWTPayload } from './jwt-payload.ts'
 
 
 export interface AuthenticationRequest extends Request{

@@ -1,16 +1,17 @@
-import IProjeto from "../models/IProjeto";
-import { IPlanTypeRepository } from "../repository/IPlanTypeRepository";
-import { IProjetoRepository } from "../repository/IProjetoRepository";
-import { CustomResult } from "../types/custom-result";
-import { IPlanService } from "../types/IPlanService";
-import { IProjectService } from "../types/IProjectService";
+import IProjeto from "../models/IProjeto.ts"
+import { IProjetoRepository } from "../repository/IProjetoRepository.ts"
+import { CustomResult } from "../types/custom-result.ts"
+import { IPlanService } from "../types/IPlanService.ts"
+import { IProjectService } from "../types/IProjectService.ts"
 
 export default class ProjectService implements IProjectService {
     constructor(
         private readonly projectRepository: IProjetoRepository,
         private readonly planService: IPlanService
     ) { }
-
+    isExist(projectid: number): Promise<boolean> {
+        throw new Error("Method not implemented.")
+    }
 
 
     async createProject(project: Partial<IProjeto>, planid: number, userid: number): Promise<CustomResult> {
@@ -35,5 +36,6 @@ export default class ProjectService implements IProjectService {
             }
         }
     }
+
 
 }

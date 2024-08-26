@@ -1,6 +1,7 @@
-import IParticipante from "../models/IParticipante";
-import IProjeto from "../models/IProjeto";
-import IRepository from "./IRepositoryBase";
+import IParticipante from "../models/IParticipante.ts"
+import IProjeto from "../models/IProjeto.ts"
+import IRepository from "./IRepositoryBase.ts"
+
 
 export interface IProjetoRepository extends IRepository<IProjeto>{
     exist(projectid:number):Promise<boolean>
